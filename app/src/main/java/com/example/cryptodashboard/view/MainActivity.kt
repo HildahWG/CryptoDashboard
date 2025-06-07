@@ -167,7 +167,7 @@ class MainActivity : ComponentActivity() {
                                     data = coin.sparkline_in_7d?.price ?: emptyList(),
                                     modifier = Modifier
                                         .fillMaxWidth()
-                                        .height(30.dp)
+                                        .height(30.dp) ,labelColor = Color(0xFFF5F5F5)
                                 )
                             }
                         }
