@@ -2,8 +2,10 @@ package com.example.cryptodashboard.view
 
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -11,6 +13,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -39,6 +43,8 @@ fun CoinDetailContent(
     price: String,
     volume: String,
     marketCap: String,
+    coinValue: String,
+    coinPercentage: String,
     priceChartData: List<Float>,
     selectedRange: String,
     onRangeSelected: (String) -> Unit,
@@ -63,15 +69,32 @@ fun CoinDetailContent(
             ),
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(vertical = 8.dp),
-            textAlign = TextAlign.Center
+                .padding(start = 16.dp),
+            textAlign = TextAlign.Start
         )
-
-
-        TimeRangeSelector(
-            selectedRange = selectedRange,
-            onRangeSelected = onRangeSelected
+        Text(
+            text = "$coinValue usd",
+            style = MaterialTheme.typography.labelLarge.copy(
+                fontStyle = FontStyle.Italic,
+                color = Color(0xFF800000)
+            ),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(start = 16.dp),
+            textAlign = TextAlign.Start
         )
+       /* Text(
+            text = coinPercentage,
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontStyle = FontStyle.Italic,
+                color = Color(0xFF800000)
+            ),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(start = 16.dp),
+            textAlign = TextAlign.Start
+        )*/
+
 
         Spacer(modifier = Modifier.height(16.dp))
 
@@ -80,46 +103,110 @@ fun CoinDetailContent(
             modifier = Modifier
                 .fillMaxWidth()
                 .height(250.dp)
-                .background(Color(0xFF36454F))
+                .background(Color(0xFFF5F5F5))
         ) {
-            LineChart(data = priceChartData, modifier = Modifier.fillMaxSize())
+            LineChart(data = priceChartData, labelColor = Color(0xFF36454F),modifier = Modifier.fillMaxSize())
         }
+
+        Spacer(modifier = Modifier.height(16.dp))
+        TimeRangeSelector(
+            selectedRange = selectedRange,
+            onRangeSelected = onRangeSelected
+        )
 
         Spacer(modifier = Modifier.height(16.dp))
 
         Text(
-            text = "Price: $price",
-            fontSize = 12.sp,
+            text = "Bitcoin Information",
+            fontSize = 14.sp,
             color = Color(0xFF800000),
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(vertical = 8.dp),
-            textAlign = TextAlign.Center
+                .padding(start = 16.dp, bottom = 4.dp),
+            textAlign = TextAlign.Start
         )
 
-        Text(
-            text = "Volume: $volume",
-            fontSize = 12.sp,
-            color = Color(0xFF800000),
+        // Labels and values in rows
+        Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(vertical = 8.dp),
-            textAlign = TextAlign.Center
-        )
+                .padding(vertical = 2.dp, horizontal = 16.dp),
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            Text(
+                text = "Price:",
+                fontSize = 12.sp,
+                color = Color(0xFF800000)
+            )
+            Text(
+                text = price,
+                fontSize = 12.sp,
+                color = Color(0xFF800000)
+            )
+        }
 
-        Text(
-            text = "Market Cap: $marketCap",
-            fontSize = 12.sp,
-            color = Color(0xFF800000),
+        Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(vertical = 8.dp),
-            textAlign = TextAlign.Center
-        )
-    }
-}
-@Composable
-fun CoinsDetailsPage(
+                .padding(vertical = 2.dp, horizontal = 16.dp),
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            Text(
+                text = "Volume:",
+                fontSize = 12.sp,
+                color = Color(0xFF800000)
+            )
+            Text(
+                text = volume,
+                fontSize = 12.sp,
+                color = Color(0xFF800000)
+            )
+        }
+
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(vertical = 2.dp, horizontal = 16.dp),
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            Text(
+                text = "Market Cap:",
+                fontSize = 12.sp,
+                color = Color(0xFF800000)
+            )
+            Text(
+                text = marketCap,
+                fontSize = 12.sp,
+                color = Color(0xFF800000)
+            )
+        }
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(start = 16.dp, end = 16.dp, top = 12.dp),
+            horizontalArrangement = Arrangement.spacedBy(2.dp)
+        ) {
+            Button(
+                onClick = { /* Handle Sell action */ },
+                colors = ButtonDefaults.buttonColors(containerColor = Color.Red),
+                modifier = Modifier.weight(1f)
+            ) {
+                Text("Sell", color = Color.White)
+            }
+
+            Button(
+                onClick = { /* Handle Buy action */ },
+                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF4CAF50)), // Green
+                modifier = Modifier.weight(1f)
+            ) {
+                Text("Buy", color = Color.White)
+            }
+        }
+
+    }}
+
+        @Composable
+     fun CoinsDetailsPage(
     coinId: String,
     onBackClick: () -> Unit = {},
     viewModel: CoinDetailViewModel = viewModel()
@@ -142,6 +229,8 @@ fun CoinsDetailsPage(
     } else {
         coin?.let {
             CoinDetailContent(
+                coinValue = "${it.market_data.current_price["usd"]}",
+                coinPercentage = "${it.market_data.price_change_percentage_1h_in_currency}",
                 coinName = it.name,
                 price = "${it.market_data.current_price["usd"]}",
                 volume = "${it.market_data.total_volume["usd"]}",

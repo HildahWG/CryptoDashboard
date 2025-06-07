@@ -15,7 +15,7 @@ interface CoinGeckoApiService {
         @Path("id") coinId: String
     ): CoinDetailResponse
 
-    @GET("coins/markets?vs_currency=usd&order=market_cap_desc&per_page=50&page=1&sparkline=false")
+    @GET("coins/markets?vs_currency=usd&order=market_cap_desc&per_page=50&page=1&sparkline=true&price_change_percentage=1h")
     suspend fun getCoinsList(): List<CoinListItem>
 
     @GET("coins/{id}/market_chart")
