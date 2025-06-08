@@ -2,6 +2,7 @@ package com.example.cryptodashboard.view
 
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -11,10 +12,13 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -35,6 +39,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.cryptodashboard.ui.theme.LocalExtendedColors
 import com.example.cryptodashboard.viewmodel.CoinDetailViewModel
 
 @Composable
@@ -50,9 +55,11 @@ fun CoinDetailContent(
     onRangeSelected: (String) -> Unit,
     onBackClick: () -> Unit
 ) {
+    val customColors = LocalExtendedColors.current
     Column(
         modifier = Modifier
             .fillMaxSize()
+            .background(customColors.backgroundColor)
             .padding(16.dp)
     ) {
         // Back Button
@@ -65,7 +72,7 @@ fun CoinDetailContent(
             text = coinName,
             style = MaterialTheme.typography.headlineSmall.copy(
                 fontStyle = FontStyle.Italic,
-                color = Color(0xFF800000)
+                color = customColors.textColor
             ),
             modifier = Modifier
                 .fillMaxWidth()
@@ -76,7 +83,7 @@ fun CoinDetailContent(
             text = "$coinValue usd",
             style = MaterialTheme.typography.labelLarge.copy(
                 fontStyle = FontStyle.Italic,
-                color = Color(0xFF800000)
+                color = customColors.textColor
             ),
             modifier = Modifier
                 .fillMaxWidth()
@@ -99,27 +106,42 @@ fun CoinDetailContent(
         Spacer(modifier = Modifier.height(16.dp))
 
         // Chart
-        Box(
+        Card(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(250.dp)
-                .background(Color(0xFFF5F5F5))
+                .height(330.dp) // Fixed height
+                .padding(1.dp),
+
+            elevation = CardDefaults.cardElevation(2.dp),
+            shape = RoundedCornerShape(12.dp),
+            colors = CardDefaults.cardColors(containerColor = customColors.cardBackground)
         ) {
-            LineChart(data = priceChartData, labelColor = Color(0xFF36454F),modifier = Modifier.fillMaxSize())
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(250.dp)
+                    .background(customColors.cardBackground)
+            ) {
+                LineChart(
+                    data = priceChartData,
+                    labelColor = customColors.chartLabelColor,
+                    modifier = Modifier.fillMaxSize()
+                        .padding(5.dp)
+                )
+            }
+
+            Spacer(modifier = Modifier.height(16.dp))
+            TimeRangeSelector(
+                selectedRange = selectedRange,
+                onRangeSelected = onRangeSelected
+            )
         }
-
-        Spacer(modifier = Modifier.height(16.dp))
-        TimeRangeSelector(
-            selectedRange = selectedRange,
-            onRangeSelected = onRangeSelected
-        )
-
         Spacer(modifier = Modifier.height(16.dp))
 
         Text(
             text = "Bitcoin Information",
             fontSize = 14.sp,
-            color = Color(0xFF800000),
+            color = customColors.textColor,
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(start = 16.dp, bottom = 4.dp),
@@ -136,12 +158,12 @@ fun CoinDetailContent(
             Text(
                 text = "Price:",
                 fontSize = 12.sp,
-                color = Color(0xFF800000)
+                color = customColors.textColor
             )
             Text(
                 text = price,
                 fontSize = 12.sp,
-                color = Color(0xFF800000)
+                color = customColors.textColor
             )
         }
 
@@ -154,12 +176,12 @@ fun CoinDetailContent(
             Text(
                 text = "Volume:",
                 fontSize = 12.sp,
-                color = Color(0xFF800000)
+                color = customColors.textColor
             )
             Text(
                 text = volume,
                 fontSize = 12.sp,
-                color = Color(0xFF800000)
+                color =customColors.textColor
             )
         }
 
@@ -172,18 +194,18 @@ fun CoinDetailContent(
             Text(
                 text = "Market Cap:",
                 fontSize = 12.sp,
-                color = Color(0xFF800000)
+                color = customColors.textColor
             )
             Text(
                 text = marketCap,
                 fontSize = 12.sp,
-                color = Color(0xFF800000)
+                color = customColors.textColor
             )
         }
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(start = 16.dp, end = 16.dp, top = 12.dp),
+                .padding(start = 12.dp, end = 12.dp, top = 12.dp),
             horizontalArrangement = Arrangement.spacedBy(2.dp)
         ) {
             Button(
@@ -217,6 +239,7 @@ fun CoinDetailContent(
     val coin by viewModel.coin
     val isLoading by viewModel.isLoading
     val priceChartData by viewModel.priceChart.collectAsState()
+
 
     LaunchedEffect(selectedRange) {
         viewModel.loadCoinDetails(coinId, daysMap[selectedRange] ?: 7)

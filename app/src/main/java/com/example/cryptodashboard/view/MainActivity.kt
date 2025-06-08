@@ -5,11 +5,13 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -17,12 +19,14 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.AlertDialogDefaults.containerColor
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Divider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.SnackbarDefaults.color
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -44,6 +48,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import coil.compose.AsyncImage
 import com.example.cryptodashboard.ui.theme.CryptoDashboardTheme
+import com.example.cryptodashboard.ui.theme.LocalExtendedColors
 import com.example.cryptodashboard.viewmodel.DashboardViewModel
 
 class MainActivity : ComponentActivity() {
@@ -92,18 +97,24 @@ class MainActivity : ComponentActivity() {
         val isLoading by dashboardViewModel.isLoading
         val error by dashboardViewModel.error
 
+        val customColors = LocalExtendedColors.current
+
         // Load coins when first composed
         LaunchedEffect(Unit) {
             dashboardViewModel.fetchCoins()
         }
 
-        Column(modifier = modifier.padding(16.dp)) {
+        Column(modifier = modifier.fillMaxSize()
+            .background(customColors.backgroundColor).padding(16.dp)) {
             OutlinedTextField(
+
                 value = searchQuery,
                 onValueChange = onSearchQueryChanged,
                 modifier = Modifier.fillMaxWidth(),
                 placeholder = { Text("Search coin") },
-                singleLine = true
+                singleLine = true,
+                        colors = OutlinedTextFieldDefaults.colors(
+                        focusedContainerColor = customColors.cardBackground,)
             )
 
             Spacer(modifier = Modifier.height(16.dp))
@@ -129,7 +140,7 @@ class MainActivity : ComponentActivity() {
                                 .clickable { onCoinClick(coin.id) },
                             elevation = CardDefaults.cardElevation(2.dp),
                             shape = RoundedCornerShape(12.dp),
-                            colors = CardDefaults.cardColors(containerColor = Color(0xFFF5F5F5))
+                            colors = CardDefaults.cardColors(containerColor = customColors.cardBackground)
                         ) {
                             Column(modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)) {
                                 Row(
@@ -145,8 +156,8 @@ class MainActivity : ComponentActivity() {
                                     )
 
                                     Column(modifier = Modifier.weight(1f)) {
-                                        Text(text = coin.name, style = MaterialTheme.typography.bodySmall)
-                                        Text(text = coin.symbol.uppercase(), style = MaterialTheme.typography.labelSmall)
+                                        Text(text = coin.name, style = MaterialTheme.typography.bodySmall, color = customColors.textColor)
+                                        Text(text = coin.symbol.uppercase(), style = MaterialTheme.typography.labelSmall,color = customColors.textColor)
                                     }
 
                                     val change = coin.price_change_percentage_1h_in_currency ?: 0.0
@@ -167,8 +178,8 @@ class MainActivity : ComponentActivity() {
                                     data = coin.sparkline_in_7d?.price ?: emptyList(),
                                     modifier = Modifier
                                         .fillMaxWidth()
-                                        .height(30.dp) ,labelColor = Color(0xFFF5F5F5)
-                                )
+                                        .height(30.dp) ,labelColor = customColors.cardBackground)
+
                             }
                         }
                     }
