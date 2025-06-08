@@ -30,3 +30,9 @@ Current price and market cap
 1-hour price change percentage
 7-day sparkline data for line charts
 
+
+![image](https://github.com/user-attachments/assets/fc807156-fb4b-47bd-804b-1dd36b78c444)
+![image](https://github.com/user-attachments/assets/07d2fa01-40b0-4759-9339-00a1eac560e1)
+![image](https://github.com/user-attachments/assets/b9fba321-a3ba-4ee3-9fe6-28651f160504)
+
+
