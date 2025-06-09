@@ -42,12 +42,15 @@ LAYOUT OF THE APPLICATION IN LIGHT THEME
 
 LAYOUT OF THE APP IN DARK RHEME
 ![image](https://github.com/user-attachments/assets/19031847-3e1a-4c0c-94c0-087151169d82)
-![image](https://github.com/user-attachments/assets/804ab047-ae7e-4d08-a2d8-56b52d3f2960)
+![image](https://github.com/user-attachments/assets/892813b0-3ac6-42c6-bb1d-80f24bc9e9dd)
 ![image](https://github.com/user-attachments/assets/6d5fc45e-c29d-4bce-83c2-f90418bbb51b)
 
 
 
-A SHORT VIDEO DEMO OF THE LAYOUT OF THE APP
+A SHORT VIDEO DEMO OF THE LAYOUT OF THE APP 
+
+https://github.com/user-attachments/assets/7fc4446a-1c21-43e5-ac27-3b452215ad0
+
 https://github.com/user-attachments/assets/6081e1da-daf8-4356-841a-97c152feaf36
 
 
