@@ -50,6 +50,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import coil.compose.AsyncImage
+import com.example.cryptodashboard.model.ChartPoint
 import com.example.cryptodashboard.ui.theme.CryptoDashboardTheme
 import com.example.cryptodashboard.ui.theme.LocalExtendedColors
 import com.example.cryptodashboard.viewmodel.DashboardViewModel
@@ -179,10 +180,13 @@ class MainActivity : ComponentActivity() {
 
                                 // Line chart takes lower half
                                 LineChart(
-                                    data = coin.sparkline_in_7d?.price ?: emptyList(),
+                                    data = coin.sparkline_in_7d?.price?.mapIndexed { index, price ->
+                                        ChartPoint(timestamp = index.toLong(), price = price)
+                                    } ?: emptyList(),
+
                                     modifier = Modifier
                                         .fillMaxWidth()
-                                        .height(30.dp) ,labelColor = customColors.cardBackground)
+                                        .height(30.dp) ,   selectedRange = "7D",labelColor = customColors.cardBackground)
 
                             }
                         }

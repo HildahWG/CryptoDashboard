@@ -29,3 +29,7 @@ data class MarketChartResponse(
 data class SparklineIn7D(
     val price: List<Float>
 )
+data class ChartPoint(
+    val timestamp: Long,
+    val price: Float
+)

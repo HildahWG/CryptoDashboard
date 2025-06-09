@@ -39,6 +39,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.cryptodashboard.model.ChartPoint
 import com.example.cryptodashboard.ui.theme.LocalExtendedColors
 import com.example.cryptodashboard.viewmodel.CoinDetailViewModel
 
@@ -50,7 +51,7 @@ fun CoinDetailContent(
     marketCap: String,
     coinValue: String,
     coinPercentage: String,
-    priceChartData: List<Float>,
+    priceChartData: List<ChartPoint>,
     selectedRange: String,
     onRangeSelected: (String) -> Unit,
     onBackClick: () -> Unit
@@ -125,6 +126,7 @@ fun CoinDetailContent(
                 LineChart(
                     data = priceChartData,
                     labelColor = customColors.chartLabelColor,
+                    selectedRange = selectedRange,
                     modifier = Modifier.fillMaxSize()
                         .padding(5.dp)
                 )

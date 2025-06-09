@@ -18,7 +18,7 @@ fun TimeRangeSelector(
     selectedRange: String,
     onRangeSelected: (String) -> Unit
 ) {
-    val ranges = listOf("1Day", "7Dys", "1Mth", "3Mth", "1Yr ")
+    val ranges = listOf("1D", "7D", "1M", "3M", "1Y")
     FlowRow(
         modifier = Modifier.fillMaxWidth(),
         mainAxisSpacing = 8.dp,
