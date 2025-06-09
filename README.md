@@ -31,8 +31,16 @@ Current price and market cap
 7-day sparkline data for line charts
 
 
-![image](https://github.com/user-attachments/assets/fc807156-fb4b-47bd-804b-1dd36b78c444)
-![image](https://github.com/user-attachments/assets/07d2fa01-40b0-4759-9339-00a1eac560e1)
-![image](https://github.com/user-attachments/assets/b9fba321-a3ba-4ee3-9fe6-28651f160504)
+LAYOUT OF THE APPLICATION IN LIGHT THEME
+![image](https://github.com/user-attachments/assets/f3a7b9b9-5d62-4008-bdff-b760a9e9b394)
+![image](https://github.com/user-attachments/assets/0a466135-c16c-4fc6-b672-6fa86b36d808)
+
+LAYOUT OF THE APP IN DARK RHEME
+![image](https://github.com/user-attachments/assets/19031847-3e1a-4c0c-94c0-087151169d82)
+![image](https://github.com/user-attachments/assets/804ab047-ae7e-4d08-a2d8-56b52d3f2960)
+
+A SHORT VIDEO DEMO OF THE LAYOUT OF THE APP
+https://github.com/user-attachments/assets/6081e1da-daf8-4356-841a-97c152feaf36
+
 
 
