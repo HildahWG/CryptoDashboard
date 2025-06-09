@@ -33,11 +33,19 @@ Current price and market cap
 
 LAYOUT OF THE APPLICATION IN LIGHT THEME
 ![image](https://github.com/user-attachments/assets/f3a7b9b9-5d62-4008-bdff-b760a9e9b394)
-![image](https://github.com/user-attachments/assets/0a466135-c16c-4fc6-b672-6fa86b36d808)
+![image](https://github.com/user-attachments/assets/20bb3631-58a9-47bc-a808-1b5aec6c92ce)
+![image](https://github.com/user-attachments/assets/171c818a-e599-4c46-870e-ac074439feb2)
+
+
+
+
 
 LAYOUT OF THE APP IN DARK RHEME
 ![image](https://github.com/user-attachments/assets/19031847-3e1a-4c0c-94c0-087151169d82)
 ![image](https://github.com/user-attachments/assets/804ab047-ae7e-4d08-a2d8-56b52d3f2960)
+![image](https://github.com/user-attachments/assets/6d5fc45e-c29d-4bce-83c2-f90418bbb51b)
+
+
 
 A SHORT VIDEO DEMO OF THE LAYOUT OF THE APP
 https://github.com/user-attachments/assets/6081e1da-daf8-4356-841a-97c152feaf36
