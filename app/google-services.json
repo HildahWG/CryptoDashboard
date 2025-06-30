@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "244140527250",
+    "project_id": "cryptodashboard-e2396",
+    "storage_bucket": "cryptodashboard-e2396.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:244140527250:android:4412a766d8170575ea604b",
+        "android_client_info": {
+          "package_name": "com.example.cryptodashboard"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDaEKaLCRr9C-T_a7SG-00rGCHJSkqLf88"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:244140527250:android:b3ec1dc627c4e9afea604b",
+        "android_client_info": {
+          "package_name": "com.hildah.cryptodashboard"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDaEKaLCRr9C-T_a7SG-00rGCHJSkqLf88"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
