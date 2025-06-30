@@ -7,7 +7,7 @@ plugins {
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.kotlin.kapt)
     alias(libs.plugins.dagger.hilt)
-
+    alias(libs.plugins.google.services)
 
 
 
@@ -51,6 +51,8 @@ android {
 }
 
 dependencies {
+    implementation(libs.firebase.firestore)
+    implementation("androidx.compose.material:material-icons-extended")
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
@@ -94,6 +96,8 @@ dependencies {
 
         implementation ("com.google.accompanist:accompanist-flowlayout:0.30.1")
 
+    implementation(platform("com.google.firebase:firebase-bom:32.7.2"))
+    implementation("com.google.firebase:firebase-auth-ktx")
 
 
 
