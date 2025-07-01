@@ -6,16 +6,14 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.kotlin.kapt)
+    alias(libs.plugins.ksp)
     alias(libs.plugins.dagger.hilt)
-
-
-
-
+    alias(libs.plugins.google.services)
 }
 
 android {
     namespace = "com.example.cryptodashboard"
-    compileSdk = 34
+    compileSdk = 35
 
 
 
@@ -70,33 +68,39 @@ dependencies {
 
 
 
-        implementation("androidx.compose.ui:ui:$composeVersion")
-        implementation("androidx.compose.material3:material3:$material3Version")
-        implementation("androidx.navigation:navigation-compose:$navComposeVersion")
+    implementation("androidx.compose.ui:ui:$composeVersion")
+    implementation("androidx.compose.material3:material3:$material3Version")
+    implementation("androidx.navigation:navigation-compose:$navComposeVersion")
 
-        implementation("androidx.lifecycle:lifecycle-viewmodel-compose:$lifecycleVersion")
-        implementation("androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:$lifecycleVersion")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion")
 
-        implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion")
-        implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion")
 
-        implementation("com.squareup.retrofit2:retrofit:2.9.0")
-        implementation("com.squareup.retrofit2:converter-gson:2.9.0")
-        implementation("io.coil-kt:coil-compose:2.4.0")
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation("io.coil-kt:coil-compose:2.4.0")
 
 
     implementation("com.google.dagger:hilt-android:2.48")
-        kapt("com.google.dagger:hilt-compiler:2.48")
-        implementation("androidx.hilt:hilt-navigation-compose:1.1.0")
+    kapt("com.google.dagger:hilt-compiler:2.48")
+    implementation("androidx.hilt:hilt-navigation-compose:1.1.0")
 
-        //implementation("com.github.PhilJay:MPAndroidChart:$mpChartVersion")
-        implementation("com.google.accompanist:accompanist-systemuicontroller:$accompanistVersion")
+    //implementation("com.github.PhilJay:MPAndroidChart:$mpChartVersion")
+    implementation("com.google.accompanist:accompanist-systemuicontroller:$accompanistVersion")
 
-        implementation ("com.google.accompanist:accompanist-flowlayout:0.30.1")
+    implementation("com.google.accompanist:accompanist-flowlayout:0.30.1")
 
+//    room
+    implementation(libs.room)
+    ksp(libs.room.compiler)
 
+//    firebase
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.auth)
 
-
+    implementation(libs.androidx.material.icons.extended)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
